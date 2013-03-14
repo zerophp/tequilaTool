@@ -1,0 +1,25 @@
+<?php
+$this->title = "My Question";
+$this->headTitle($this->title);
+?>
+<p><a href="<?php echo $this->url(array('controller'=>'question',
+'action'=>'add'));?>">Add new Question</a></p>
+<table>
+    <tr>
+    <th>Question</th>
+    
+    <th>&nbsp;</th>
+    </tr>
+    <?php foreach($this->questions as $question) : ?>
+    <tr>
+        <td><?php echo $this->escape($question->question);?></td>
+        
+        <td>
+            <a href="<?php echo $this->url(array('controller'=>'question',
+            'action'=>'edit', 'idquestions'=>$question->idquestions));?>">Edit</a>
+            <a href="<?php echo $this->url(array('controller'=>'question',
+            'action'=>'delete', 'idquestions'=>$question->idquestions));?>">Delete</a>
+        </td>
+    </tr>
+    <?php endforeach; ?>
+</table>
