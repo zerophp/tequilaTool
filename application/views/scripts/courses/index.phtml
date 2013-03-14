@@ -1,0 +1,27 @@
+<?php
+$this->title = "My Courses";
+$this->headTitle($this->title);
+?>
+<p><a href="<?php echo $this->url(array('controller'=>'courses',
+'action'=>'add'));?>">Add new course</a></p>
+<table>
+<tr>
+<th>Course</th>
+<th>Date Init</th>
+<th>Date End</th>
+<th>&nbsp;</th>
+</tr>
+<?php foreach($this->entries as $entry) : ?>
+<tr>
+<td><?php echo $this->escape($entry->course);?></td>
+<td><?php echo $this->escape($entry->dini);?></td>
+<td><?php echo $this->escape($entry->dfini);?></td>
+<td>
+<a href="<?php echo $this->url(array('controller'=>'courses',
+'action'=>'edit', 'idcourses'=>$entry->idcourses));?>">Edit</a>
+<a href="<?php echo $this->url(array('controller'=>'courses',
+'action'=>'delete', 'idcourses'=>$entry->idcourses));?>">Delete</a>
+</td>
+</tr>
+<?php endforeach; ?>
+</table>
