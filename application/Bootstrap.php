@@ -1,5 +1,15 @@
 <?php
 
+/**
+ * Bootstrap
+ * 
+ * VERY IMPORTANT
+ * 
+ * To add some protected function to the app
+ * use with _init prefix instead init
+ * 
+ */
+
 class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 {
 	
@@ -38,12 +48,23 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     	Zend_Registry::set('Zend_Locale', $locale);
     }
     
-    protected function _initLang() 
+    protected function initLang() 
     {
-//     	$translate = new Zend_Translate('tmx', APPLICATION_PATH . '/languages/info.xml', $_SESSION['default']['language']);
-//     	Zend_Registry::set('Zend_Translate', $translate);
+    	$translate = new Zend_Translate('tmx', APPLICATION_PATH . '/languages/info.xml', $_SESSION['default']['language']);
+    	Zend_Registry::set('Zend_Translate', $translate);
     }
     
+    
+    protected function initNavigation()
+    {
+    	$this->bootstrap('layout');
+    	$config = $this->getOptions();
+    	$layout = $this->getResource('layout');
+    	$view = $layout->getView();
+    	$confignav = new Zend_Config_Xml($config['navigationMenu'], 'nav');
+    	$container = new Zend_Navigation($confignav);
+    	$view->navigation($container);
+    }
     
     protected function _initView() 
     {
