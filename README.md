@@ -8,8 +8,10 @@ URL: https://github.com/agustincl/tequilaTool
 Hacer un fork
 
 Entras en el directorio donde tienes el proyecto y haces los siquientes comandos:
+
 git init
-git clone <vuesto email de github>
+
+git clone "vuesto email de github, sin estas comillas"
 
 Para hacer subir los cambios, dentro de tu directorio:
 ---
