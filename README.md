@@ -11,7 +11,7 @@ Entras en el directorio donde tienes el proyecto y haces los siquientes comandos
 
 git init
 
-git clone "vuesto email de github, sin estas comillas"
+git clone "vuesto repo de github, sin estas comillas"
 
 Para hacer subir los cambios, dentro de tu directorio:
 ---
