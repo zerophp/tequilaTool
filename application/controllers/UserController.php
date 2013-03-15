@@ -37,8 +37,9 @@ class UserController extends Zend_Controller_Action
         		$user->setPassword($password);
         		$user->setStatus($status);
         		        		
-        		$users = new Application_Model_DbTable_Users();
-        		$users->addUser($user);        		
+        		$users = new Application_Model_DbTable_Users();          		  
+        		$users->addUser($user);
+        		        	
         		$this->_helper->redirector('index');
         	} else {
         		$form->populate($formData);
@@ -57,7 +58,7 @@ class UserController extends Zend_Controller_Action
         	$formData = $this->getRequest()->getPost();
         	if ($form->isValid($formData)) {
         	    
-        	    $iduser =  $form->getValue('iduser');
+        	    $iduser =  $form->getValue('idusers');
         		$name = $form->getValue('name');
         		$email = $form->getValue('email');
         		$dbirth = $form->getValue('dbirth');
@@ -74,12 +75,13 @@ class UserController extends Zend_Controller_Action
         		
         		$users = new Application_Model_DbTable_Users();
         		$users->updateUser($user);
+        		
         		$this->_helper->redirector('index');
         	} else {
         		$form->populate($formData);
         	}
         } else {
-        	$id = $this->_getParam('iduser', 0);
+        	$id = $this->_getParam('idusers', 0);
         	if ($id > 0) {
         		$users = new Application_Model_DbTable_Users();
         		$form->populate($users->getUser($id));
@@ -89,16 +91,19 @@ class UserController extends Zend_Controller_Action
     
     public function deleteAction()
     {
-        if ($this->getRequest()->isPost()) {
+        if ($this->getRequest()->isPost())
+        {
         	$del = $this->getRequest()->getPost('del');
-        	if ($del == 'Yes') {
-        		$iduser = $this->getRequest()->getPost('iduser');
+        	if ($del == 'Yes') 
+        	{
+        		$iduser = $this->getRequest()->getPost('idusers');
         		$users = new Application_Model_DbTable_Users();
         		$users->deleteUser($iduser);
         	}
         	$this->_helper->redirector('index');
-        } else {
-        	$iduser = $this->_getParam('iduser', 0);
+        } else 
+        {
+        	$iduser = $this->_getParam('idusers', 0);
         	$users = new Application_Model_DbTable_Users();
         	$this->view->user = $users->getUser($iduser);
         }

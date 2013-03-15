@@ -5,7 +5,7 @@ class Application_Form_User extends Zend_Form
     {
         $this->setName('user');
         
-        $iduser = new Zend_Form_Element_Hidden('iduser');
+        $iduser = new Zend_Form_Element_Hidden('idusers');
         
         $iduser->addFilter('Int');
         
@@ -27,14 +27,15 @@ class Application_Form_User extends Zend_Form
 				->addFilter('StripTags')
 				->addFilter('StringTrim')
 				->addValidator('NotEmpty')
-				->addValidator('EmailAddress');
+				->addValidator('EmailAddress');		
 		
 		$dbirth = new Zend_Form_Element_Text('dbirth');
 		$dbirth->setLabel('Birthday')
 		->setRequired(true)
 		->addFilter('StripTags')
 		->addFilter('StringTrim')
-		->addValidator('NotEmpty');
+		->addValidator('NotEmpty')
+		->addValidator('Date', false, array('YYYY-MM-dd'));
 		
 		
 		
