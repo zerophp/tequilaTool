@@ -1,0 +1,15 @@
+<?php
+$this->title = "Delete exam";
+$this->headTitle($this->title);
+?>
+<p>Are you sure that you want to delete the exam 
+'<?php echo $this->escape($this->exam['name']); ?>' created on 
+'<?php echo $this->escape($this->exam['dcreation']); ?>'?
+</p>
+<form action="<?php echo $this->url(array('action'=>'delete')); ?>" method="post">
+<div>
+<input type="hidden" name="idexams" value="<?php echo $this->exam['idexams']; ?>" />
+<input type="submit" name="del" value="Yes" />
+<input type="submit" name="del" value="No" />
+</div>
+</form>
