@@ -2,7 +2,7 @@
 
 class Application_Model_User
 {
-    private $idusers;
+    private $iduser;
     private $name;
     private $email;
     private $dbirth;
@@ -54,7 +54,7 @@ class Application_Model_User
 	 * @return the $iduser
 	 */
 	public function getIduser() {
-		return $this->idusers;
+		return $this->iduser;
 	}
 
 	/**
@@ -89,7 +89,7 @@ class Application_Model_User
 	 * @param field_type $iduser
 	 */
 	public function setIduser($iduser) {
-		$this->idusers = $iduser;
+		$this->iduser = $iduser;
 	}
 
 	/**
