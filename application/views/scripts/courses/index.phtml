@@ -5,17 +5,20 @@ $this->headTitle($this->title);
 <p><a href="<?php echo $this->url(array('controller'=>'courses',
 'action'=>'add'));?>">Add new course</a></p>
 <table>
-<tr>
+<tr align=left>
 <th>Course</th>
+<th>Description</th>
 <th>Date Init</th>
 <th>Date End</th>
-<th>&nbsp;</th>
+<th>Options</th>
 </tr>
 <?php foreach($this->entries as $entry) : ?>
-<tr>
-<td><?php echo $this->escape($entry->course);?></td>
-<td><?php echo $this->escape($entry->dini);?></td>
-<td><?php echo $this->escape($entry->dfini);?></td>
+<tr align=left>
+<td><?php echo $this->escape($entry->course);?>&nbsp;&nbsp;&nbsp;</td>
+<td><?php echo $this->escape($entry->description);?>&nbsp;&nbsp;&nbsp;</td>
+<td><?php echo $this->escape($entry->dini);?>&nbsp;&nbsp;&nbsp;</td>
+<td><?php echo $this->escape($entry->dfini);?>&nbsp;&nbsp;&nbsp;</td>
+
 <td>
 <a href="<?php echo $this->url(array('controller'=>'courses',
 'action'=>'edit', 'idcourses'=>$entry->idcourses));?>">Edit</a>

@@ -11,7 +11,7 @@ class CoursesController extends Zend_Controller_Action
     public function indexAction()
     {   
         
-        $course = new Application_Model_CourseMapper();
+        $course = new Application_Model_DbTable_Courses();
         $this->view->entries = $course->fetchAll();
     }
 
@@ -24,22 +24,19 @@ class CoursesController extends Zend_Controller_Action
     		$formData = $this->getRequest()->getPost();
     		if ($form->isValid($formData)) {
     			$course = $form->getValue('course');
+    			$description = $form->getValue('description');
     			$dini = $form->getValue('dini');
     			$dfini = $form->getValue('dfini');
-    			
-    			$courses = new Application_Model_Course($form->getValues());
-    			$mapper  = new Application_Model_CourseMapper();
-    			$mapper->save($courses);
-    			return $this->_helper->redirector('index');
-    			
-    			
-    		} else {
-    			$form->populate($formData);
-    		}
+    			$courses = new Application_Model_DbTable_Courses();
+    			$courses->addCourse($course, $description, $dini, $dfini);
+    			$this->_helper->redirector('index');
+    			} else {
+    				$form->populate($formData);
     	}
     }
+    }
     
-    function editAction()
+    public function editAction()
     {
     	$form = new Application_Form_Course();
     	$form->submit->setLabel('Save');
@@ -47,46 +44,42 @@ class CoursesController extends Zend_Controller_Action
     	if ($this->getRequest()->isPost()) {
     		$formData = $this->getRequest()->getPost();
     		if ($form->isValid($formData)) {
-    		   		    
-    		    $id  = $form->getValue('idcourses');
+    			$idcourses = (int)$form->getValue('idcourses');
     			$course = $form->getValue('course');
+    			$description = $form->getValue('description');
     			$dini = $form->getValue('dini');
     			$dfini = $form->getValue('dfini');
-    			$courses = new Application_Model_Course($form->getValues());
-    			$mapper  = new Application_Model_CourseMapper();
-    			$mapper->save($courses);
+    			$courses = new Application_Model_DbTable_Courses();
+    			$courses->updateCourse($idcourses, $course, $description, $dini, $dfini);
     			$this->_helper->redirector('index');
     		} else {
     			$form->populate($formData);
     		}
     	} else {
-    		$id = $this->_getParam('idcourses', 0);
-    		if ($id > 0) {
-    		    $courses = new Application_Model_Course();
-    		    
-    		    
-    			$mapper  = new Application_Model_CourseMapper();
-	  			
-   			 
-    			$form->populate($mapper->find($id,$courses));
+    		$idcourses = $this->_getParam('idcourses', 0);
+    		if ($idcourses > 0) {
+    			$courses = new Application_Model_DbTable_Courses();
+    			$form->populate($courses->getCourse($idcourses));
     		}
     	}
     }
-    public function deleteAction()
+    
+    
+	public function deleteAction()
     {
-    	if ($this->getRequest()->isPost()) {
-    		$del = $this->getRequest()->getPost('del');
-    		if ($del == 'Yes') {
-    			$id = $this->getRequest()->getPost('id');
-    			$users = new Application_Model_DbTable_users();
-    			$users->deleteUser($id);
-    		}
-    		$this->_helper->redirector('index');
-    	} else {
-    		$id = $this->_getParam('id', 0);
-    		$users = new Application_Model_DbTable_users();
-    		$this->view->user = $users->getUser($id);
-    	}
+        if ($this->getRequest()->isPost()) {
+        	$del = $this->getRequest()->getPost('del');
+        	if ($del == 'Yes') {
+        		$idcourses = $this->getRequest()->getPost('idcourses');
+        		$courses = new Application_Model_DbTable_Courses();
+        		$courses->deleteCourse($idcourses);
+        	}
+        	$this->_helper->redirector('index');
+        } else {
+        	$idcourses = $this->_getParam('idcourses', 0);
+        	$courses = new Application_Model_DbTable_Courses();
+        	$this->view->course = $courses->getCourse($idcourses);
+        }
     }
     
 
