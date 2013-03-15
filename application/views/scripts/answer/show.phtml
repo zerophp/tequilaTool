@@ -1,0 +1,19 @@
+<?php
+$this->title = "My answers";
+$this->headTitle($this->title);
+?>
+<table>
+    <tr>
+    <th>Question</th>
+    <th>Correct answer</th>
+    <th>User answer</th>
+    </tr>
+    <?php print_r($this->answers); die(); ?>
+    <?php foreach($this->answers as $answer) : ?>
+    <tr>
+        <td><?php echo $this->escape($answer['question']);?></td>
+        <td><?php echo $this->escape($answer['solution']);?></td>
+        <td><?php echo $this->escape($answer['answer']);?></td>
+    </tr>
+    <?php endforeach;  ?>
+</table>
