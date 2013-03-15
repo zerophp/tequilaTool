@@ -1,0 +1,25 @@
+<?php
+$this->title = "My Exam";
+$this->headTitle($this->title);
+?>
+<p><a href="<?php echo $this->url(array('controller'=>'exam',
+'action'=>'add'));?>">Add new exam</a></p>
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Date of creation</th>
+        <th>&nbsp;</th>
+    </tr>
+    <?php foreach($this->exams as $exam) : ?>
+    <tr>
+        <td><?php echo $this->escape($exam->name);?></td>
+        <td><?php echo $this->escape($exam->dcreation);?></td>
+        <td>
+        <a href="<?php echo $this->url(array('controller'=>'exam',
+        'action'=>'edit', 'idexams'=>$exam->idexams));?>">Edit</a>
+        <a href="<?php echo $this->url(array('controller'=>'exam',
+        'action'=>'delete', 'idexams'=>$exam->idexams));?>">Delete</a>
+        </td>
+    </tr>
+    <?php endforeach; ?>
+</table>
