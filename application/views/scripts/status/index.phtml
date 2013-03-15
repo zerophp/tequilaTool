@@ -1,0 +1,25 @@
+<?php
+$this->title = "My Status";
+$this->headTitle($this->title);
+?>
+<p><a href="<?php echo $this->url(array('controller'=>'status',
+'action'=>'add'));?>">Add new status</a></p>
+<table border = 1>
+    <tr>
+    <th>Id Status</th>
+    <th>Status</th>
+    <th>&nbsp;</th>
+    </tr>
+    <?php foreach($this->statuss as $status) : ?>
+    <tr>
+        <td><?php echo $this->escape($status->idstatus);?></td>
+        <td><?php echo $this->escape($status->status);?></td>
+        <td>
+            <a href="<?php echo $this->url(array('controller'=>'status',
+            'action'=>'edit', 'idstatus'=>$status->idstatus));?>">Edit</a>
+            <a href="<?php echo $this->url(array('controller'=>'status',
+            'action'=>'delete', 'idstatus'=>$status->idstatus));?>">Delete</a>
+        </td>
+    </tr>
+    <?php endforeach;  ?>
+</table>
