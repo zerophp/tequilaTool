@@ -1,0 +1,32 @@
+<?php
+$this->title = "Examinations";
+$this->headTitle($this->title);
+?>
+
+<p><a href="<?php echo $this->url(array('controller'=>'examinations',
+'action'=>'add'));?>">Add new examination</a></p>
+<table>
+<tr>
+<th>Id</th>
+<th>Curse</th>
+<th>Exam</th>
+<th>D.Ini</th>
+<th>D.End</th>
+<th>&nbsp;</th>
+</tr>
+<?php foreach($this->Examinations as $examinations) : ?>
+<tr>
+<td><?php echo $this->escape($examinations->idexaminations);?></td>
+<td><?php echo $this->escape($examinations->courses_idcourses);?></td>
+<td><?php echo $this->escape($examinations->exams_idexams);?></td>
+<td><?php echo $this->escape($examinations->dini);?></td>
+<td><?php echo $this->escape($examinations->dfini);?></td>
+<td>
+<a href="<?php echo $this->url(array('controller'=>'examinations',
+'action'=>'edit', 'id'=>$examinations->idexaminations));?>">Edit</a>
+<a href="<?php echo $this->url(array('controller'=>'examinations',
+'action'=>'delete', 'id'=>$examinations->idexaminations));?>">Delete</a>
+</td>
+</tr>
+<?php endforeach; ?>
+</table>
