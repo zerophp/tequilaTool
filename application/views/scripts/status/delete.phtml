@@ -1,0 +1,15 @@
+<?php
+$this->title = "Delete status";
+$this->headTitle($this->title);
+?>
+<p>Are you sure that you want to delete
+'<?php echo $this->escape($this->status['idstatus']); ?>' :
+'<?php echo $this->escape($this->status['status']); ?>'?
+</p>
+<form action="<?php echo $this->url(array('action'=>'delete')); ?>" method="post">
+<div>
+<input type="hidden" name="idstatus" value="<?php echo $this->status['idstatus']; ?>" />
+<input type="submit" name="del" value="Yes" />
+<input type="submit" name="del" value="No" />
+</div>
+</form>
